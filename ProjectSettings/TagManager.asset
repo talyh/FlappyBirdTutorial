@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ceiling
+  - Column
   layers:
   - Default
   - TransparentFX

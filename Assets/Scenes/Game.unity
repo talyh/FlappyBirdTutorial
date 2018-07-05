@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b404c28dd0b04174a1d94545ed1de01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upForce: 200
+  _flapForce: 200
 --- !u!95 &46359175
 Animator:
   serializedVersion: 3
@@ -789,10 +789,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669f6a65bdb78439b8e8af03b85d96a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 187802223}
-  gameOvertext: {fileID: 518009041}
+  _scoreText: {fileID: 187802223}
+  _gameOverMessage: {fileID: 518009041}
   gameOver: 0
-  scrollSpeed: -1.5
+  scrollSpeed: {x: -1.5, y: 0}
 --- !u!4 &584486999
 Transform:
   m_ObjectHideFlags: 0
@@ -843,15 +843,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 627910534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebaa59a974b6047069700b948d4c2eca, type: 3}
+  m_Script: {fileID: 11500000, guid: a37fd4dc8f61843b3be3128a6ed16387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columnPrefab: {fileID: 1747299694130256, guid: 143e439b881fb466aa2fc44f0560a3c9,
-    type: 2}
-  columnPoolSize: 5
-  spawnRate: 4
-  columnMin: -2
-  columnMax: 2
+  _prefab: {fileID: 1747299694130256, guid: 143e439b881fb466aa2fc44f0560a3c9, type: 2}
+  _poolSize: 5
+  _spawnRate: 4
+  _minY: -2
+  _maxY: 2
+  _objectPoolPosition: {x: -15, y: -25}
 --- !u!1 &1471382591
 GameObject:
   m_ObjectHideFlags: 0

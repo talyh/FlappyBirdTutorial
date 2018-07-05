@@ -1,39 +1,49 @@
-﻿using System.Collections;
+﻿// "using" are C#'s version of JS "import"
+// They may be entire packages or just namespaces (like importing a React Component to be used somewhere else)
+// System and its derivates are C# standard, while UnityEngine ones allows us to access things specific to Unity
+// Classes in the same namespace (or where no namespace is defined) don't need to be cross-imported 
+using System.Collections;
 using UnityEngine;
 
 public class RepeatingBackground : MonoBehaviour
 {
 
-	private BoxCollider2D groundCollider; //This stores a reference to the collider attached to the Ground.
-	private float groundHorizontalLength; //A float to store the x-axis length of the collider2D attached to the Ground GameObject.
+	// Think of these as a React's component props
+	private BoxCollider2D _boxCollider; // reference to the Collider attached to this GameObject
+	private float _horizontalLength; // the x-axis length of the collider attached to this GameObject
 
-	//Awake is called before Start.
+	// this is called by the engine when the game scene is loaded
 	private void Awake()
 	{
-		//Get and store a reference to the collider2D attached to Ground.
-		groundCollider = GetComponent<BoxCollider2D>();
-		//Store the size of the collider along the x axis (its length in units).
-		groundHorizontalLength = groundCollider.size.x;
+		// get and store a reference to the Collider2D attached to Ground
+		_boxCollider = GetComponent<BoxCollider2D>();
+
+		// store the size of the collider along the x axis (its length in units).
+		_horizontalLength = _boxCollider.size.x;
 	}
 
-	//Update runs once per frame
+	// this is called by the engine on every frame of the game
+
 	private void Update()
 	{
-		//Check if the difference along the x axis between the main Camera and the position of the object this is attached to is greater than groundHorizontalLength.
-		if (transform.position.x < -groundHorizontalLength)
+		// because the Game Camera controlled by the engine starts at 0, if this object's current x value
+		// is smaller then the size of the collider, it was scrolled out of view
+		// if this was scrolled out of view
+		if (transform.position.x < -_horizontalLength)
 		{
-			//If true, this means this object is no longer visible and we can safely move it forward to be re-used.
+			// reposition it so it can be reused
 			RepositionBackground();
 		}
 	}
 
-	//Moves the object this script is attached to right in order to create our looping background effect.
+	// moves the object this script is attached to right in order to create a looping background effect
 	private void RepositionBackground()
 	{
-		//This is how far to the right we will move our background object, in this case, twice its length. This will position it directly to the right of the currently visible background object.
-		Vector2 groundOffSet = new Vector2(groundHorizontalLength * 2f, 0);
+		// determine how much to move the background object by
+		// we're going with twice its length, positioning it directly to the right of the currently visible background object
+		Vector2 offset = new Vector2(_horizontalLength * 2f, 0);
 
-		//Move this object from it's position offscreen, behind the player, to the new position off-camera in front of the player.
-		transform.position = (Vector2) transform.position + groundOffSet;
+		// move the object from it's current position to the one we just calculated
+		transform.position = (Vector2) transform.position + offset;
 	}
 }
