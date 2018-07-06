@@ -23,7 +23,6 @@ public class RepeatingBackground : MonoBehaviour
 	}
 
 	// this is called by the engine on every frame of the game
-
 	private void Update()
 	{
 		// because the Game Camera controlled by the engine starts at 0, if this object's current x value

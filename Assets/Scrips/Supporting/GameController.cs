@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 	private GameObject _gameOverMessage; // reference to the object that displays the text which appears when the player dies.
 
 	private int _score = 0; // the player's score.
-	public bool gameOver = false; // control whether the game is over
+	public bool gameOver; // control whether the game is over
 	public Vector2 scrollSpeed = new Vector2(-1.5f, 0); // the speed at which all objects should scroll
 	public static GameController instance; // reference to our GameController script so we can access it statically
 
@@ -31,8 +31,8 @@ public class GameController : MonoBehaviour
 			// set this one to be it
 			instance = this;
 		}
-		// if the instance is not the version of GameController, that's awakening
-		else if (instance != this)
+		// if the instance is not the version of GameController that's awakening
+		else
 		{
 			// destroy this one because it is a duplicate.
 			Destroy(gameObject);

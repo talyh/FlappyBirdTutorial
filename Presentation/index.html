@@ -1,0 +1,840 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Flappy Bird Tutorial</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/personalized.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="theme-font-montserrat theme-color-cobalt-orange" style="width: 100%; height: 100%;">
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 238px; height: auto;">
+						<div class="sl-block-content" style="z-index: 10;">
+							<h1>
+								<span style="color:#DAA520">Flappy Bird Tutorial</span>
+							</h1>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 331px;">
+						<div class="sl-block-content" style="z-index: 11;" dir="ui">
+							<p>(... in 15 minutes or less)</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 388px;">
+						<div class="sl-block-content" style="z-index: 13; transition-duration: 0.6s; transition-delay: 5s;" dir="ui" data-animation-type="fade-in">
+							<p>(... hopefully)</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 42px; height: auto;">
+						<div class="sl-block-content" style="z-index: 11;">
+							<h2>Our goal</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="iframe" style="min-width: 30px; min-height: 30px; width: 779px; height: 442px; left: 104px; top: 159px;">
+						<div class="sl-block-content" style="z-index: 12;">
+							<iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock"
+							 data-src="https://www.youtube.com/embed/PhbGBxZcct4?enablejsapi=1"></iframe>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 688px; left: 136px; top: 621px;">
+						<div class="sl-block-content" style="z-index: 13;">
+							<p>
+								<a href="https://github.com/talyh/FlappyBirdTutorial" target="_blank">https://github.com/talyh/FlappyBirdTutorial</a>
+							</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 189px; height: auto;">
+						<div class="sl-block-content" style="z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">What We Need to Understand First</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 337px; height: auto;">
+						<div class="sl-block-content" style="z-index: 11;">
+							<ul>
+								<li>Inheritance</li>
+								<li>Game Loop</li>
+								<li>Singleton</li>
+								<li>Object Pools</li>
+								<li>Some very basic Unity concepts</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Inheritance</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="image" style="width: 468px; height: 295px; left: 208px; top: 173px; min-width: 4px; min-height: 4px;">
+							<div class="sl-block-content" style="z-index: 12; border-style: solid; border-width: 1px; border-color: rgb(0, 0, 0);">
+								<img data-natural-width="1550" data-natural-height="976" style="" data-lazy-loaded="" data-src="media/Inheritance.png" />
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 831px; left: 58px; top: 527px;">
+							<div class="sl-block-content" style="z-index: 13;">
+								<p style="text-align:left">In Unity, objects commonly inherit from
+									<strong>MonoBehaviour</strong>, which allows access to the engine standard properties and behaviours. All Unity objects
+									then are known as
+									<strong>GameObjects</strong>.
+								</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 11;">
+								<h2>
+									<span style="color:#DAA520">Inheritance</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="width: 906px; left: 29px; top: 217px; height: auto;">
+							<div class="sl-block-content" style="z-index: 12; text-align: left;">
+								<blockquote>
+									<p>&nbsp;Having a class being based off another class</p>
+								</blockquote>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 895px; left: 29px; top: 323px;">
+							<div class="sl-block-content" style="z-index: 13;">
+								<p style="text-align:left">This allows for shared properties and behaviour, while at the same time specializing what's unique about each part
+									of the system.</p>
+								<p style="text-align:left">&nbsp;</p>
+								<p style="text-align:left">
+									<span style="color:rgb(255, 255, 255); text-align:left">For instance, all React components inherit common behaviours (render(), componentDidMount(), etc) from the definition,
+										but then they have their own state and methods.</span>
+								</p>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Game Loop</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="image" style="width: 468px; height: 268px; left: 208px; top: 186.5px; min-width: 4px; min-height: 4px;">
+							<div class="sl-block-content" style="z-index: 11; border-style: solid; border-width: 1px; border-color: rgb(0, 0, 0);">
+								<img data-natural-width="1321" data-natural-height="756" style="" data-lazy-loaded="" data-src="media/GameLoop.gif" />
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 831px; left: 58px; top: 527px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">No matter what the player is doing, the game loop is running and doing it's thing.</p>
+								<p style="text-align:left">In Unity, this is the
+									<strong> Update()</strong>&nbsp;method, which is available to all GameObjects.
+								</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Game Loop</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="width: 906px; left: 29px; top: 217px; height: auto;">
+							<div class="sl-block-content" style="z-index: 11; text-align: left;">
+								<blockquote>&nbsp;A continuous loop that runs one iteration per frame of the game</blockquote>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 895px; left: 29px; top: 323px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">
+									<span style="color:rgb(255, 255, 255); text-align:left">During the game loop, the game is continuously listening for inputing, calculating physics, rendering objects, etc.</span>
+								</p>
+								<p style="text-align:left">&nbsp;</p>
+								<p style="text-align:left">
+									<span style="color:rgb(255, 255, 255); text-align:left">Though not exactly the same, this is analogous to a browser window.</span>
+								</p>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Singleton</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="image" style="width: 468px; height: 279px; left: 208px; top: 181.5px; min-width: 4px; min-height: 4px;">
+							<div class="sl-block-content" style="z-index: 11; border-style: solid; border-width: 1px; border-color: rgb(0, 0, 0);">
+								<img data-natural-width="1294" data-natural-height="772" style="" data-lazy-loaded="" data-src="media/Singleton.gif" />
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 831px; left: 58px; top: 527px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">While we can have multiple players, things like a SceneController, SoundController, GameController, etc, tend to
+									be unique.
+								</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Singleton</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="width: 906px; left: 29px; top: 217px; height: auto;">
+							<div class="sl-block-content" style="z-index: 11; text-align: left;">
+								<blockquote>&nbsp;A pattern that ensures a given class always has a single instance</blockquote>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 895px; left: 29px; top: 323px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">Imagine a game that had multiple SoundManagers, all trying to determine which music to play when. Coordinating them
+									could become a nightmare. Instead, we enforce the existence of a single instance.</p>
+								<p style="text-align:left">&nbsp;</p>
+								<p style="text-align:left">Think of a Redux store. Yes, you may have more than one, but should you?</p>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Object Pool</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="image" style="width: 468px; height: 268px; left: 208px; top: 187.5px; min-width: 4px; min-height: 4px;">
+							<div class="sl-block-content" style="z-index: 11; border-style: solid; border-width: 1px; border-color: rgb(0, 0, 0);">
+								<img data-natural-width="1321" data-natural-height="756" style="" data-lazy-loaded="" data-src="media/ObjectPool.gif" />
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 831px; left: 58px; top: 527px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">Instead of creating and destroying objects all the time, we recycle them.</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div class="sl-block" data-block-type="text" style="width: 413px; left: 29px; top: 84px; height: auto;">
+							<div class="sl-block-content" style="text-align: left; z-index: 10;">
+								<h2>
+									<span style="color:#DAA520">Object Pool</span>
+								</h2>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="width: 906px; left: 29px; top: 217px; height: auto;">
+							<div class="sl-block-content" style="z-index: 11; text-align: left;">
+								<blockquote>&nbsp;A pattern that uses a set of initialized objects kept ready to use – a "pool" – rather than allocating and
+									destroying them on demand</blockquote>
+							</div>
+						</div>
+						<div class="sl-block" data-block-type="text" style="height: auto; width: 895px; left: 29px; top: 350px;">
+							<div class="sl-block-content" style="z-index: 12;">
+								<p style="text-align:left">Think of a game where copies of an object are collected constantly. Instantiating and destroying them can become
+									expensive to the point of not running the game. Instead, we just recycle the ones that are inactive.</p>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 851px; left: 29px; top: 84px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10;" dir="ui">
+							<h2>
+								<span style="color:#DAA520">Basic Unity Concepts</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="width: 252px; left: 29px; top: 258px; height: auto;">
+						<div class="sl-block-content" style="z-index: 11; text-align: left;" dir="ui">
+							<ul>
+								<li>
+									<a href="https://docs.unity3d.com/Manual/class-GameObject.html" target="_blank">GameObject</a>
+								</li>
+								<li>
+									<a href="https://docs.unity3d.com/ScriptReference/Transform.html" target="_blank">Transform</a>
+								</li>
+								<li>
+									<a href="https://docs.unity3d.com/Manual/class-Rigidbody2D.html" target="_blank">Rigidbody2D</a>
+								</li>
+								<li>
+									<a href="https://docs.unity3d.com/Manual/Collider2D.html" target="_blank">Collider2D</a>
+								</li>
+								<li>
+									<a href="https://docs.unity3d.com/Manual/class-AnimatorController.html" target="_blank">Animator</a>
+								</li>
+							</ul>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<ul>
+								<li>
+									<a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank">Vector2</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 216px; height: 518px; left: 320px; top: 171px;">
+						<div class="sl-block-content" style="z-index: 12;">
+							<img data-natural-width="562" data-natural-height="1350" style="" data-lazy-loaded="" data-src="media/BirdGameObject.png"
+							/>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 347px; left: 576px; top: 258px;">
+						<div class="sl-block-content" style="z-index: 13; text-align: left;">
+							<ul>
+								<li style="color:rgb(255, 255, 255)">
+									<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html" target="_blank">Awake</a>&nbsp;/
+									<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html" target="_blank">Start</a>
+								</li>
+								<li style="color:rgb(255, 255, 255)">
+									<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html" target="_blank">Update</a>
+								</li>
+								<li style="color:rgb(255, 255, 255)">
+									<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter2D.html" target="_blank">OnCollisionEnter2D</a>
+								</li>
+								<li style="color:rgb(255, 255, 255)">
+									<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnTriggerEnter2D.html" target="_blank">OnTriggerEnter2D</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 193px; left: 29px; top: 219px;">
+						<div class="sl-block-content" style="z-index: 14; text-align: left;">
+							<p>
+								<strong>Components</strong>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 193px; left: 576px; top: 219px;">
+						<div class="sl-block-content" style="z-index: 16; text-align: left;">
+							<p>
+								<strong>Methods</strong>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 193px; left: 29px; top: 521px;">
+						<div class="sl-block-content" style="z-index: 17; text-align: left;">
+							<p>
+								<strong>Data Type</strong>
+							</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 42px; height: auto;">
+						<div class="sl-block-content" style="z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">Now we can start coding!</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="image" style="width: 710px; height: 406px; left: 125px; top: 189px; min-width: 4px; min-height: 4px;">
+						<div class="sl-block-content" style="z-index: 11;">
+							<img data-natural-width="1321" data-natural-height="756" style="" data-lazy-loaded="" data-src="https://media1.giphy.com/media/rjkJD1v80CjYs/200w.webp"
+							/>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 22px; height: auto;">
+						<div class="sl-block-content" style="z-index: 11;">
+							<h1>
+								<span style="color:#DAA520">Well... Kinda...</span>
+							</h1>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;">
+						<div class="sl-block-content" style="z-index: 12; text-align: left;">
+							<h2>
+								<span style="font-size:0.7em">Here's what we'll write code for:</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 831px; left: 77px; top: 241px;">
+						<div class="sl-block-content" style="z-index: 13; text-align: left;">
+							<ul>
+								<li>A
+									<strong>
+										<span style="color:#DAA520">Bird</span>
+									</strong> that when flaps, moves only the vertical axis. When not flapping, it falls to the ground.
+								</li>
+								<li>A
+									<span style="color:#DAA520">
+										<strong>GameController</strong>
+									</span>, to keep track of whether the game is running, score, etc.
+								</li>
+								<li>An
+									<span style="color:#DAA520">
+										<strong>ObjectPool</strong>
+									</span> to spawn columns as needed.
+								</li>
+								<li>A
+									<span style="color:#DAA520">
+										<strong>Repositioner</strong>
+									</span>, to take a background piece off screen and place it back in front of the bird
+								</li>
+								<li>A
+									<span style="color:#DAA520">
+										<strong>Scroller</strong>
+									</span>&nbsp;to move the background and columns to the left, to give the impression of the bird moving forward
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">GameController - Singleton</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 382px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11;">
+							<pre class="cs">
+									<code>public static GameController instance; // reference to our GameController script so
+						// we can access it statically
+	
+// this is called by the engine when the game scene is loaded
+private void Awake()
+{
+	// if we don't currently have a GameController
+	if (!instance)
+	{
+		// set this one to be it
+		instance = this;
+	}
+	// if the instance is not the version of GameController that's awakening
+	else
+	{
+		// destroy this one because it is a duplicate.
+		Destroy(gameObject);
+	}
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 11;">
+							<h2>
+								<span style="color:#DAA520">The Bird - Flapping</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 863px; height: 500px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 12; font-size: 80%;">
+							<pre class="cs">
+									<code>// this is called by the engine on every frame of the game
+private void Update()
+{
+	// if the bird is dead, don't bother checking anything else
+	if (GameController.instance.gameOver)
+	{
+		return;
+	}
+	
+	// look for input to trigger a "flap".
+	// this is derived from the engine, and listens for input, in this case, 
+	// a mouse click or tap event
+	if (Input.GetMouseButtonDown(0))
+	{
+		FlapOnClick();
+	}
+}
+	
+// do the actual flapping action, benefitting fro \m the engine's access to 
+// animation and rigidbody properties
+private void FlapOnClick()
+{
+	// tell the animator about it so it plays the Flap animation
+	_animator.SetTrigger("Flap");
+	
+	// zero out the birds current y velocity so it doesn't compound with the new flap
+	_rigidbody.velocity = Vector2.zero;
+	
+	// give the bird no force in the x axis, and flapForce in y 
+	// so it moves up but stays in the same horizontal position
+	_rigidbody.AddForce(new Vector2(0, _flapForce));
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 11;">
+							<h2>
+								<span style="color:#DAA520">The Bird - Dying</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 334px; left: 40px; top: 150px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 12; font-size: 84%;">
+							<pre class="cs">
+									<code>// this is called whenever the engine detects this gameObject collided with another
+// it needs the Collision2D parameter so it can access the properties 
+// of whatever it collided with
+private void OnCollisionEnter2D(Collision2D other)
+{
+	// if colliding with the ceiling, don't do anything
+	if (other.gameObject.CompareTag("Ceiling"))
+	{
+		return;
+	}
+	
+	// tell the animator about it so it plays the Die animation
+	_animator.SetTrigger("Die");
+	
+	// zero out the bird's velocity, so it doesn't move based on remaining forces
+	_rigidbody.velocity = Vector2.zero;
+	
+	// notify the GameController
+	GameController.instance.GameOver();
+}</code></pre>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 40px; top: 120px;">
+						<div class="sl-block-content" style="z-index: 13;">
+							<p style="text-align:left">
+								<span style="font-size:0.7em">
+									<strong>On Bird</strong>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 40px; top: 518px;">
+						<div class="sl-block-content" style="z-index: 14;">
+							<p style="text-align:left">
+								<span style="font-size:0.7em">
+									<strong>On GameController</strong>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 863px; height: 106px; left: 39px; top: 550px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 15; font-size: 84%;">
+							<pre class="cs">
+									<code>public void GameOver()
+{
+	// activate the game over message
+	_gameOverMessage.SetActive(true);
+	
+	// set the game to be over
+	gameOver = true;
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">The Bird - Scoring</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 201px; left: 40px; top: 150px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11; font-size: 90%;">
+							<pre class="cs">
+									<code>// this is called whenever the engine detects this gameObject entered 
+// another object's trigger area it needs the Collider2D parameter so
+// it can access the properties of whatever was triggered
+private void OnTriggerEnter2D(Collider2D other)
+{
+	// if the trigger was a column gap, score points
+	if (other.gameObject.CompareTag("Column"))
+	{
+		GameController.instance.Score();
+	}
+}</code></pre>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 40px; top: 120px;">
+						<div class="sl-block-content" style="z-index: 12;">
+							<p style="text-align:left">
+								<span style="font-size:0.7em">
+									<strong>On Bird</strong>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 40px; top: 392px;">
+						<div class="sl-block-content" style="z-index: 13;">
+							<p style="text-align:left">
+								<span style="font-size:0.7em">
+									<strong>On GameController</strong>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 250px; left: 39px; top: 420px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 14; font-size: 90%;">
+							<pre class="cs">
+									<code>public void Score()
+{
+	// can't score if the game is over
+	if (gameOver)
+	{
+		return;
+	}
+	
+	// If the game is not over, increase the score
+	_score++;
+	
+	// and adjust the score text
+	_scoreText.text = "Score: " + _score.ToString();
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10; font-size: 94%;">
+							<h2>
+								<span style="color:#DAA520">GameController - Restart Game</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 210px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11;">
+							<pre class="cs">
+									<code>// this is called by the engine on every frame of the game
+private void Update()
+{
+	// if the game is over and the player has flapped again
+	if (gameOver &amp;&amp; Input.GetMouseButtonDown(0))
+	{
+		// use Unity's built-in library to reload the current scene
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10; font-size: 84%;">
+							<h2>
+								<span style="color:#DAA520">RepeatingBackground - Reposition</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 510px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11;">
+							<pre class="cs">
+									<code>// this is called by the engine on every frame of the game
+private void Update()
+{
+	// because the Game Camera controlled by the engine starts at 0, 
+	// if this object's current x value is smaller then the size
+	// of the collider, it was scrolled out of view
+	// if this was scrolled out of view
+	if (transform.position.x &lt; -_horizontalLength)
+	{
+		// reposition it so it can be reused
+		RepositionBackground();
+	}
+}
+	
+// moves the object this script is attached to right in order to create 
+// a looping background effect
+private void RepositionBackground()
+{
+	// determine how much to move the background object by
+	// we're going with twice its length, positioning it directly to the right
+	// of the currently visible background object
+	Vector2 offset = new Vector2(_horizontalLength * 2f, 0);
+	
+	// move the object from it's current position to the one we just calculated
+	transform.position = (Vector2) transform.position + offset;
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">ScrollingObject - Scroll</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 392px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11;">
+							<pre class="cs">
+									<code>// this is called by the engine when the game scene is loaded
+private void Start()
+{
+	// get and store a reference to the Rigidbody2D attached to this GameObject
+	_rigidbody = GetComponent&lt;Rigidbody2D&gt;();
+	
+	// start the object moving in the x-axis, with the scrollSpeed 
+	// determined in the GameController
+	_rigidbody.velocity = GameController.instance.scrollSpeed;
+}
+	
+// this is called by the engine on every frame of the game
+private void Update()
+{
+	// if the game is over, stop scrolling
+	if (GameController.instance.gameOver)
+	{
+		_rigidbody.velocity = Vector2.zero;
+	}
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 883px; left: 29px; top: 31px; height: auto;">
+						<div class="sl-block-content" style="text-align: left; z-index: 10; font-size: 93%;">
+							<h2>
+								<span style="color:#DAA520">ObjectPool - Recycle Elements</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="code" style="width: 863px; height: 520px; left: 40px; top: 140px;">
+						<div class="sl-block-content notranslate" data-highlight-theme="zenburn" style="z-index: 11; font-size: 91%;">
+							<pre class="cs">
+									<code>// this is called by the engine on every frame of the game
+private void Update()
+{
+	// increase the timer by the time elapsed since the last frame
+	_timeSinceLastSpawned += Time.deltaTime;
+	
+	// while the game is not over, whenever the timer the timer reaches the spawn rate
+	if (!GameController.instance.gameOver &amp;&amp; _timeSinceLastSpawned &gt;= _spawnRate)
+	{
+		// spawn a new object
+		SpawnObject();
+	}
+}
+	
+private void SpawnObject()
+{
+	// reset the timer
+	_timeSinceLastSpawned = 0f;
+	
+	// determine a random y position for the object, within boundaries
+	float spawnYPosition = Random.Range(_minY, _maxY);
+	
+	// set the current object in the array to that position
+	// since the player isn't moving, the x position can be fixed, 
+	// while the random y is used
+	_objects[_currentObject].transform.position = new Vector2(_spawnXPosition, 
+	spawnYPosition);
+	
+	// move the currentObject index to the next position in the array
+	_currentObject = (_currentObject + 1) % _poolSize;
+}</code></pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 42px; height: auto;">
+						<div class="sl-block-content" style="z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">Questions?</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="image" style="width: 560px; height: 406px; left: 200px; top: 189px; min-width: 4px; min-height: 4px;">
+						<div class="sl-block-content" style="z-index: 11;">
+							<img data-natural-width="756" data-natural-height="756" style="" data-lazy-loaded="" data-src="https://media1.giphy.com/media/4T3QPfXhVHrlvekSbf/200w.webp"
+							/>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 42px; height: auto;">
+						<div class="sl-block-content" style="z-index: 10;">
+							<h2>
+								<span style="color:#DAA520">Thank You!!</span>
+							</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 562px; height: 389px; left: 212px; top: 140px;">
+						<div class="sl-block-content" style="z-index: 11; transition-duration: 0.6s; transition-delay: 2s;" data-animation-type="fade-out">
+							<img data-natural-width="325" data-natural-height="225" style="" data-lazy-loaded="" data-src="https://media3.giphy.com/media/yidUzqyycy6ZiNoYQE/giphy.gif"
+							/>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 193px; top: 253px;">
+						<div class="sl-block-content" style="z-index: 12; transition-duration: 0.6s; transition-delay: 2.5s;" data-animation-type="fade-in">
+							<h2>Taly Hotimsky</h2>
+						</div>
+					</div>
+					<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 760px; left: 106px; top: 335px;">
+						<div class="sl-block-content" style="z-index: 14; transition-duration: 0.6s; transition-delay: 2.5s;" dir="ui" data-animation-type="fade-in">
+							<p>
+								<a href="https://github.com/talyh/FlappyBirdTutorial" target="_blank">https://github.com/talyh/FlappyBirdTutorial​</a>
+							</p>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			],
+			width: 960,
+			height: 700,
+			transition: "slide",
+			backgroundTransition: "slide",
+			center: false
+		});
+	</script>
+</body>
+
+</html>

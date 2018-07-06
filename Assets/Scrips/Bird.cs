@@ -60,7 +60,7 @@ public class Bird : MonoBehaviour
 
 	// this is called whenever the engine detects this gameObject collided with another
 	// it needs the Collision2D parameter so it can access the properties of whatever it collided with
-	void OnCollisionEnter2D(Collision2D other)
+	private void OnCollisionEnter2D(Collision2D other)
 	{
 		// if colliding with the ceiling, don't do anything
 		if (other.gameObject.CompareTag("Ceiling"))
@@ -80,7 +80,7 @@ public class Bird : MonoBehaviour
 
 	// this is called whenever the engine detects this gameObject entered another object's trigger area
 	// it needs the Collider2D parameter so it can access the properties of whatever was triggered
-	void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
 		// if the trigger was a column gap, score points
 		if (other.gameObject.CompareTag("Column"))

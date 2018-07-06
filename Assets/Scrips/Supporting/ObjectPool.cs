@@ -44,7 +44,6 @@ public class ObjectPool : MonoBehaviour
 	}
 
 	// this is called by the engine on every frame of the game
-
 	private void Update()
 	{
 		// increase the timer by the time elapsed since the last frame
